@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DigitalThinkers.SelfServiceCheckout.Data.Migrations
 {
     [DbContext(typeof(SelfServiceCheckoutDbContext))]
-    [Migration("20210529152035_AddBanknoteUniqueIndex")]
+    [Migration("20210529161940_AddBanknoteUniqueIndex")]
     partial class AddBanknoteUniqueIndex
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -46,6 +46,9 @@ namespace DigitalThinkers.SelfServiceCheckout.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CurrencyId");
+
+                    b.HasIndex("ValueInTCY", "CurrencyId")
+                        .IsUnique();
 
                     b.ToTable("Banknotes");
                 });

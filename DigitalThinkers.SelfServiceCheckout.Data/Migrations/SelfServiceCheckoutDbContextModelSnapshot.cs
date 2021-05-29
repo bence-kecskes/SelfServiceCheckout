@@ -45,6 +45,9 @@ namespace DigitalThinkers.SelfServiceCheckout.Data.Migrations
 
                     b.HasIndex("CurrencyId");
 
+                    b.HasIndex("ValueInTCY", "CurrencyId")
+                        .IsUnique();
+
                     b.ToTable("Banknotes");
                 });
 
