@@ -10,8 +10,9 @@ using System.Threading.Tasks;
 
 namespace DigitalThinkers.SelfServiceCheckout.Api.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
+    [ApiVersion("1")]
     public class StockController : ControllerBase
     {
         private StockService stockService;
