@@ -1,4 +1,5 @@
 ﻿using DigitalThinkers.SelfServiceCheckout.Data.Entities;
+using DigitalThinkers.SelfServiceCheckout.Data.Interceptors;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,10 @@ namespace DigitalThinkers.SelfServiceCheckout.Data.Context
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+        }
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.AddInterceptors(AuditInterceptor.Instance);
         }
     }
 }
