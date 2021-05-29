@@ -1,7 +1,7 @@
 # SelfServiceCheckout
 BeforeStart  
 DigitalThinkers.SelfServiceCheckout.Data -> Developer PowerShell / Developer Command Prompt -> dotnet ef database update  
-Run DigitalThinkers.SelfServiceCheckout\Data\Seed SelfServiceCheckoutDbSeed.sql  
+Run DigitalThinkers.SelfServiceCheckout\Data\Seed\SelfServiceCheckoutDbSeed.sql  
 
 Features:  
 /api/v{version}/Stock Get Return current lcy stock  
