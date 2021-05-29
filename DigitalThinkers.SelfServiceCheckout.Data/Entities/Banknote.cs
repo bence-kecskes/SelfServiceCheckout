@@ -20,6 +20,7 @@ namespace DigitalThinkers.SelfServiceCheckout.Data.Entities
                    .WithMany(c => c.Banknotes)
                    .HasForeignKey(b => b.CurrencyId)
                    .HasForeignKey(c => c.CurrencyId);
+            builder.HasIndex(b => new { b.ValueInTCY, b.CurrencyId }).IsUnique();
         }
     }
 }
