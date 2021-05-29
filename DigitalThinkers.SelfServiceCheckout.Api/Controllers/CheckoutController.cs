@@ -14,7 +14,7 @@ namespace DigitalThinkers.SelfServiceCheckout.Api.Controllers
     [ApiVersion("1")]
     public class CheckoutController : ControllerBase
     {
-        private CheckoutService checkoutService;
+        private readonly CheckoutService checkoutService;
         public CheckoutController(CheckoutService checkoutService)
         {
             this.checkoutService = checkoutService;
@@ -22,8 +22,8 @@ namespace DigitalThinkers.SelfServiceCheckout.Api.Controllers
         [HttpPost]
         public async Task<IEnumerable<Banknote>> PostAsync([FromBody] InsertedBanknotes insertedBanknotes)
         {
-            var result = checkoutService.Checkout(insertedBanknotes);
-            return await result;
+            var result = await checkoutService.Checkout(insertedBanknotes);
+            return result;
         }
     }
 }
