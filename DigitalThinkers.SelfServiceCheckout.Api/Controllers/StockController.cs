@@ -1,6 +1,8 @@
 ﻿using DigitalThinkers.SelfServiceCheckout.Logic.Models;
 using DigitalThinkers.SelfServiceCheckout.Logic.Services;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +17,7 @@ namespace DigitalThinkers.SelfServiceCheckout.Api.Controllers
     [ApiVersion("1")]
     public class StockController : ControllerBase
     {
-        private StockService stockService;
+        private readonly StockService stockService;
         public StockController(StockService stockService)
         {
             this.stockService = stockService;
@@ -28,9 +30,9 @@ namespace DigitalThinkers.SelfServiceCheckout.Api.Controllers
             return result;
         }
         [HttpPost]
-        public async Task<IEnumerable<Banknote>> PostAsync([FromBody] IEnumerable<Banknote> banknotes)
+        public async Task<IEnumerable<Banknote>> PostAsync([FromBody] InsertedBanknotes insertedBanknotes)
         {
-            var result = await stockService.InsertBanknotesInLcyAsync(banknotes);
+            var result = await stockService.InsertBanknotesInLcyAsync(insertedBanknotes.Inserted);
             return result;
         }
 

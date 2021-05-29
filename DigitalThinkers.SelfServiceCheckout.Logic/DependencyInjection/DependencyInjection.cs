@@ -15,6 +15,7 @@ namespace Microsoft.DependencyInjection.Extensions
         public static IServiceCollection RegisterLogicServices(this IServiceCollection services)
         {
             services.AddScoped<StockService>();
+            services.AddScoped<CheckoutService>();
 
             var mapperConfig = new MapperConfiguration(mc =>
             {

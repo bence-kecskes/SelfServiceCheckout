@@ -12,18 +12,18 @@ namespace DigitalThinkers.SelfServiceCheckout.Logic.Services
     public class StockService
     {
         private IMapper mapper;
-        private IBanknoterepository banknoterepository;
+        private IBanknoteRepository banknoteRepository;
         private ICurrencyRepository currencyRepository;
-        public StockService(IMapper mapper, IBanknoterepository banknoterepository, ICurrencyRepository currencyRepository)
+        public StockService(IMapper mapper, IBanknoteRepository banknoteRepository, ICurrencyRepository currencyRepository)
         {
             this.mapper = mapper;
-            this.banknoterepository = banknoterepository;
+            this.banknoteRepository = banknoteRepository;
             this.currencyRepository = currencyRepository;
         }
 
         public async Task<IEnumerable<Banknote>> GetBanknotesInLcyAsync()
         {
-            var result = await banknoterepository.GetAllAsync();
+            var result = await banknoteRepository.GetAllAsync();
             return mapper.Map<IEnumerable<Banknote>>(result);
         }
 
@@ -32,8 +32,8 @@ namespace DigitalThinkers.SelfServiceCheckout.Logic.Services
             var mappedBanknotes = mapper.Map<IEnumerable<Data.Entities.Banknote>>(banknotes);
             var lcyId = await currencyRepository.GetLcyAsync();
             mappedBanknotes.ToList().ForEach(b => b.CurrencyId = lcyId.Id);
-            banknoterepository.AddOrUpdate(mappedBanknotes);
-            var result = await banknoterepository.GetAllAsync();
+            banknoteRepository.AddOrUpdate(mappedBanknotes);
+            var result = await banknoteRepository.GetAllAsync();
             return mapper.Map<IEnumerable<Banknote>>(result);
         }
     }

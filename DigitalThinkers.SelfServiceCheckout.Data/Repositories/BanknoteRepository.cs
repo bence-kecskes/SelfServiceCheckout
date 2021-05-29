@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DigitalThinkers.SelfServiceCheckout.Data.Repositories
 {
-    public class BanknoteRepository : GenericRepository<Banknote>, IBanknoterepository
+    public class BanknoteRepository : GenericRepository<Banknote>, IBanknoteRepository
     {
         public BanknoteRepository(SelfServiceCheckoutDbContext selfServiceCheckoutDbContext)
             : base(selfServiceCheckoutDbContext) { }
@@ -32,6 +32,17 @@ namespace DigitalThinkers.SelfServiceCheckout.Data.Repositories
                     existing.Amount += banknote.Amount;
                     DbSet.Update(existing);
                 }
+            }
+            SelfServiceCheckoutDbContext.SaveChanges();
+        }
+
+        public void RemoveChange(IEnumerable<Banknote> banknotes)
+        {
+            foreach (var banknote in banknotes)
+            {
+                var findItem = DbSet.FirstOrDefault(b => b.Id == banknote.Id);
+                findItem.Amount -= banknote.Amount;
+                DbSet.Update(findItem);
             }
             SelfServiceCheckoutDbContext.SaveChanges();
         }

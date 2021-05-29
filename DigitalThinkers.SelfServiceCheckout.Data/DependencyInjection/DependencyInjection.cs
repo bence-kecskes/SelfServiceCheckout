@@ -15,7 +15,7 @@ namespace Microsoft.DependencyInjection.Extensions
         public static IServiceCollection RegisterDataServices(this IServiceCollection services, string ConnectionString)
         {
             services.AddDbContext<SelfServiceCheckoutDbContext>(options => options.UseSqlServer(ConnectionString));
-            services.AddScoped<IBanknoterepository, BanknoteRepository>();
+            services.AddScoped<IBanknoteRepository, BanknoteRepository>();
             services.AddScoped<ICurrencyRepository, CurrencyRepository>();
             return services;
         }

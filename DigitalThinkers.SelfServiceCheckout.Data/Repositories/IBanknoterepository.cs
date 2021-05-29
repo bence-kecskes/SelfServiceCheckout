@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 
 namespace DigitalThinkers.SelfServiceCheckout.Data.Repositories
 {
-    public interface IBanknoterepository : IGenericRepository<Banknote>
+    public interface IBanknoteRepository : IGenericRepository<Banknote>
     {
         void AddOrUpdate(IEnumerable<Banknote> banknotes);
+        void RemoveChange(IEnumerable<Banknote> banknotes);
     }
 }
