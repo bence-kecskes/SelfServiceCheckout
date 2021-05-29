@@ -9,7 +9,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
+    <ProjectReference Include="..\DigitalThinkers.SelfServiceCheckout.Data\DigitalThinkers.SelfServiceCheckout.Data.csproj" />
+    <ProjectReference Include="..\DigitalThinkers.SelfServiceCheckout.Logic\DigitalThinkers.SelfServiceCheckout.Logic.csproj" />
   </ItemGroup>
 
 </Project>
