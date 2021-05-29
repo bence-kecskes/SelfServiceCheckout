@@ -11,11 +11,29 @@ namespace DigitalThinkers.SelfServiceCheckout.Data.Repositories
 {
     public class BanknoteRepository : GenericRepository<Banknote>, IBanknoterepository
     {
-        public BanknoteRepository(SelfServiceCheckoutDbContext dbContext) : base(dbContext) { }
+        public BanknoteRepository(SelfServiceCheckoutDbContext selfServiceCheckoutDbContext)
+            : base(selfServiceCheckoutDbContext) { }
 
         public override async Task<IEnumerable<Banknote>> GetAllAsync()
+            => await DbSet.Where(b => b.Currency.IsLocalCurrency).ToListAsync();
+
+        public void AddOrUpdate(IEnumerable<Banknote> banknotes)
         {
-            return await DbSet.Where(b => b.Currency.IsLocalCurrency).ToListAsync();
+            List<Banknote> existingBanknotes = DbSet.ToList();
+            foreach (var banknote in banknotes)
+            {
+                var existing = existingBanknotes.FirstOrDefault(e => e.ValueInTCY == banknote.ValueInTCY && e.CurrencyId == banknote.CurrencyId);
+                if (existing == null)
+                {
+                    DbSet.Add(banknote);
+                }
+                else
+                {
+                    existing.Amount += banknote.Amount;
+                    DbSet.Update(existing);
+                }
+            }
+            SelfServiceCheckoutDbContext.SaveChanges();
         }
     }
 }

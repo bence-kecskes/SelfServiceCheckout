@@ -14,7 +14,6 @@ namespace DigitalThinkers.SelfServiceCheckout.Logic.MapperProfiles
         public LogicMappingProfile()
         {
             CreateMap<Entities.Banknote, Models.Banknote>().ReverseMap();
-            
         }
     }
 }

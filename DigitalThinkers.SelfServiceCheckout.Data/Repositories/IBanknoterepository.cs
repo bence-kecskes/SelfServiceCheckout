@@ -9,5 +9,6 @@ namespace DigitalThinkers.SelfServiceCheckout.Data.Repositories
 {
     public interface IBanknoterepository : IGenericRepository<Banknote>
     {
+        void AddOrUpdate(IEnumerable<Banknote> banknotes);
     }
 }

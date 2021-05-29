@@ -24,7 +24,14 @@ namespace DigitalThinkers.SelfServiceCheckout.Api.Controllers
         [HttpGet]
         public async Task<IEnumerable<Banknote>> GetAsync()
         {
-            return await stockService.GetBanknotesInLcyAsync();
+            var result = await stockService.GetBanknotesInLcyAsync();
+            return result;
+        }
+        [HttpPost]
+        public async Task<IEnumerable<Banknote>> PostAsync([FromBody] IEnumerable<Banknote> banknotes)
+        {
+            var result = await stockService.InsertBanknotesInLcyAsync(banknotes);
+            return result;
         }
 
     }
